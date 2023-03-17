@@ -39,16 +39,14 @@ class ClinetController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name_ar'=>'required',
-            'name_en'=>'required',
+            'name'=>'required',
             'image'=>'required'
         ]);
         $img_name=rand().time().$request->file('image')->getClientOriginalName();
         $request->file('image')->move(public_path('image/clients'),$img_name);
 
         Client::create([
-            'name_ar'=>$request->name_ar,
-            'name_en'=>$request->name_en,
+            'name'=>$request->name,
             'image'=>$img_name
 
         ]);
@@ -91,8 +89,8 @@ class ClinetController extends Controller
     {
         $client=Client::find($id);
         $request->validate([
-            'name_ar'=>'required',
-            'name_en'=>'required',
+            'name'=>'required',
+
         ]);
         $img_name=$client->image;
         if($request->image){
@@ -103,8 +101,7 @@ class ClinetController extends Controller
         }
 
         $client->update([
-            'name_ar'=>$request->name_ar,
-            'name_en'=>$request->name_en,
+            'name'=>$request->name,
             'image'=>$img_name
 
         ]);
@@ -148,3 +145,4 @@ class ClinetController extends Controller
         return redirect()->route('admin.clients.index')->with('msg', 'Client deleted permanintly successfully')->with('type', 'danger');
     }
 }
+

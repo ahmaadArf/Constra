@@ -1,9 +1,5 @@
 @extends('admin.master')
 @section('title', 'Client | ' . env('APP_NAME'))
-
-@php
-    $name = 'name_'.app()->currentLocale();
-@endphp
 @section('content')
 
     <h1>All Clients</h1>
@@ -26,7 +22,7 @@
             <tr>
                 @foreach ($clients as $client)
                     <td>{{ $client->id }}</td>
-                    <td>{{ $client->$name }} </td>
+                    <td>{{ $client->name }} </td>
                     <td><img width="80" src="{{ asset('image/clients/'.$client->image) }}" alt=""></td>
                     <td>
                         <a class="btn btn-primary" href="{{ route('admin.clients.edit', $client->id) }}"><i class="fas fa-edit"></i></a>

@@ -1,9 +1,4 @@
 @extends('admin.master')
-
-@php
-    $name = 'name_'.app()->currentLocale();
-@endphp
-
 @section('title', 'Trashed Clients | ' . env('APP_NAME'))
 
 @section('content')
@@ -28,7 +23,7 @@
             <tr>
                 @foreach ($clients as $client)
                 <td>{{ $client->id }}</td>
-                <td>{{ $client->$name }} </td>
+                <td>{{ $client->name }} </td>
                 <td><img width="80" src="{{ asset('image/clients/'.$client->image) }}" alt=""></td>
                     <td>
                         <a class="btn btn-sm btn-primary" href="{{ route('admin.clients.restore', $client->id) }}"><i class="fas fa-undo"></i></a>
