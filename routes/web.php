@@ -124,3 +124,4 @@ Route::get('/news',[SiteController::class,'news'])->name('site.news');
 Route::get('/testimonials',[SiteController::class,'testimonials'])->name('site.testimonials');
 Route::get('/faqs',[SiteController::class,'faqs'])->name('site.faqs');
 
+//ahmed
