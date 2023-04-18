@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\File;
 
 class ServiceController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:service-list|service-create|service-edit|service-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:service-create', ['only' => ['create','store']]);
+         $this->middleware('permission:service-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:service-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\File;
 
 class ClinetController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:clinet-list|clinet-create|clinet-edit|clinet-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:clinet-create', ['only' => ['create','store']]);
+         $this->middleware('permission:clinet-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:clinet-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

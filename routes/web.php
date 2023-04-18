@@ -6,7 +6,9 @@ use App\Http\Controllers\Site\SiteController;
 use App\Http\Controllers\Admin\FactController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\PriceController;
@@ -19,8 +21,8 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\ProjectDetailController;
 
 // Dashoard Routes
-                //->middleware('auth','check_user')
-Route::prefix('admin')->name('admin.')->group(function () {
+
+Route::prefix('admin')->name('admin.')->middleware('auth','check_user')->group(function () {
     //Admin Route
     Route::get('/',[AdminController::class,'index'])->name('index');
     Route::get('users',[AdminController::class,'user'])->name('users');
@@ -101,14 +103,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('testimonials/{id}/forcedelete', [TestimonialController::class, 'forcedelete'])->name('testimonials.forcedelete');
     Route::resource('testimonials',TestimonialController::class);
 
+    Route::resource('roles',RoleController::class);
+    Route::resource('users',UserController::class);
 
 
 
 });
 
-//->middleware('auth','check_user')
 Auth::routes();
-Route::view('not','not_allawd');
+Route::view('/not','admin.not_allawd')->name('not');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/',[SiteController::class,'index'])->name('site.index');
@@ -124,4 +127,4 @@ Route::get('/news',[SiteController::class,'news'])->name('site.news');
 Route::get('/testimonials',[SiteController::class,'testimonials'])->name('site.testimonials');
 Route::get('/faqs',[SiteController::class,'faqs'])->name('site.faqs');
 
-//ahmed
+

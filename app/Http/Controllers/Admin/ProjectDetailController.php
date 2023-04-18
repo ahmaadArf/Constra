@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\File;
 
 class ProjectDetailController extends Controller
 {
+
+    function __construct()
+    {
+         $this->middleware('permission:projectDetail-list|projectDetail-create|projectDetail-edit|projectDetail-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:projectDetail-create', ['only' => ['create','store']]);
+         $this->middleware('permission:projectDetail-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:projectDetail-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

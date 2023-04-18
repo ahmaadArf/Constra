@@ -9,6 +9,14 @@ use App\Models\Service;
 
 class PriceController extends Controller
 {
+
+    function __construct()
+    {
+         $this->middleware('permission:price-list|price-create|price-edit|price-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:price-create', ['only' => ['create','store']]);
+         $this->middleware('permission:price-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:price-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
